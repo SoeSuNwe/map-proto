@@ -1,0 +1,43 @@
+
+syntax = "proto3"; 
+
+package map.map_dapter_api;
+option go_package = "./";
+service AnalyticsEventGenerator
+{
+    rpc SendEvent(AnalyticsEvent) returns (AnalyticsEventResponse) {}
+}
+
+message  CreateAnalyticsTask {
+    string taskId = 1;
+    string engineId = 2;
+    repeated string sources = 3;
+    repeated string analyticsConfig =4;
+}
+
+message AnalyticsTaskStatus {
+    string taskId = 1;
+    string engineId = 2;
+    string status = 3;
+}
+
+message StopAnalyticsTask {
+    string taskId = 1;
+    string engineId = 2;
+}
+
+message AnalyticsEvent {
+    string taskId = 1;
+    string engineId = 2;
+    string sourceId = 3;
+    string timeStamp = 4;
+    string eventId = 5;
+    bytes eventData = 6;
+    string snapshot = 7;
+}
+
+message AnalyticsEventResponse {
+    string message = 1;
+    string error = 2;
+}
+ 
